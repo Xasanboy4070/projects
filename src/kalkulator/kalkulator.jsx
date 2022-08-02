@@ -31,18 +31,44 @@ class Kalkulator extends Component {
       resault: eval(num1 + action + num2),
     });
     console.log(eval(num1 + action + num2));
+    console.log("resault = ", this.state.resault);
   }
+
+  handleRestart() {
+    this.setState({
+      resault: 0,
+      num1: "",
+      num2: "",
+      actions: "",
+      btns: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      clicked: true,
+    });
+  }
+
+  Resault = this.state.resault === 0;
 
   render() {
     return (
       <div>
-        <h1 className="resault">
-          {this.state.clicked ? this.state.num1 : this.state.num2}
-        </h1>
+        {this.Resault ? (
+          <h1 className="resault">
+            {this.state.clicked ? this.state.num1 : this.state.num2}
+          </h1>
+        ) : (
+          <h1 className="resault">{+this.state.resault}</h1>
+        )}
+
         <div className="btns">
           <div className="">
             <div className="btns1">
-              <button className="btn1">AC</button>
+              <button
+                onClick={() => {
+                  this.handleRestart();
+                }}
+                className="btn1"
+              >
+                AC
+              </button>
               <button className="btn1">+/-</button>
               <button
                 value={"%"}
@@ -109,6 +135,8 @@ class Kalkulator extends Component {
               value={"+"}
               onClick={(e) => {
                 this.handleActions(e.target.value);
+                console.log(this.Resault);
+                console.log(this.state.resault);
               }}
               className="btn2"
             >
@@ -121,6 +149,8 @@ class Kalkulator extends Component {
                   this.state.actions,
                   this.state.num2
                 );
+                console.log(this.Resault);
+                console.log(this.state.resault);
               }}
               className="btn2"
             >
@@ -128,7 +158,6 @@ class Kalkulator extends Component {
             </button>
           </div>
         </div>
-        <h1 className="resault">{+this.state.resault}</h1>
       </div>
     );
   }
