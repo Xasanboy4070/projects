@@ -26,11 +26,12 @@ class Kalkulator extends Component {
   }
 
   handleResault(num1, action, num2) {
-    console.log(typeof (num1 + action + num2));
     this.setState({
       resault: eval(num1 + action + num2),
     });
-    console.log(eval(num1 + action + num2));
+    setTimeout(() => {
+      console.log(eval(num1 + action + num2));
+    }, 1000);
     console.log("resault = ", this.state.resault);
   }
 
@@ -55,7 +56,7 @@ class Kalkulator extends Component {
             {this.state.clicked ? this.state.num1 : this.state.num2}
           </h1>
         ) : (
-          <h1 className="resault">{+this.state.resault}</h1>
+          <h1 className="resault">{this.state.resault}</h1>
         )}
 
         <div className="btns">
@@ -94,7 +95,7 @@ class Kalkulator extends Component {
               ))}
               <button
                 onClick={(e) => {
-                  console.log(e.target.innerText);
+                  this.handleActions(e.target.value);
                 }}
                 className="btn3 btnZero"
               >
