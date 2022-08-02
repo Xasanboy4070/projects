@@ -28,9 +28,9 @@ class Kalkulator extends Component {
   handleResault(num1, action, num2) {
     console.log(typeof (num1 + action + num2));
     this.setState({
-      resault: Number(num1) + action + Number(num2),
+      resault: eval(num1 + action + num2),
     });
-    console.log(Math.floor(this.state.resault));
+    console.log(eval(num1 + action + num2));
   }
 
   render() {
