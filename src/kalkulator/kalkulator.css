@@ -48,6 +48,7 @@ button {
   background-color: #a5a5a5;
   color: black;
 }
+
 .btns2 {
   display: flex;
   flex-direction: column;
@@ -56,6 +57,10 @@ button {
 .btn2 {
   background-color: #fe9e04;
   color: white;
+}
+.btn2:active {
+  color: #fe9e04;
+  background-color: white;
 }
 .btns3 {
   margin-top: 10px;
@@ -66,4 +71,7 @@ button {
 .btn3 {
   background-color: #343434;
   color: white;
+}
+.btn3:active {
+  background-color: #717171;
 }
