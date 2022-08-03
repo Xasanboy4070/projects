@@ -63,9 +63,8 @@ class Kalkulator extends Component {
   Resault = this.state.resault === 0;
 
   render() {
-    
     return (
-      <div>
+      <div className="kalkulator">
         <h1
           onClick={() => {
             this.handleDelet();
