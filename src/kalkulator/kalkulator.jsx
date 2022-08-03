@@ -3,18 +3,21 @@ import "./kalkulator.css";
 
 class Kalkulator extends Component {
   state = {
-    resault: 0,
+    resault: "",
     num1: "",
     num2: "",
     actions: "",
     btns: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     clicked: true,
+    ansver: true,
   };
 
   handleNum(num) {
     if (this.state.clicked) {
+      // eslint-disable-next-line react/no-direct-mutation-state
       return this.setState({ num1: (this.state.num1 += num) });
     }
+    // eslint-disable-next-line react/no-direct-mutation-state
     return this.setState({ num2: (this.state.num2 += num) });
   }
 
@@ -25,11 +28,21 @@ class Kalkulator extends Component {
     }
   }
 
+  handleDelet() {
+    const { clicked, num1, num2 } = this.state;
+    clicked
+      ? this.setState({ num1: num1.slice(0, num1.length - 1) })
+      : this.setState({ num2: num2.slice(0, num2.length - 1) });
+  }
+
   handleResault(num1, action, num2) {
     this.setState({
+      // eslint-disable-next-line no-eval
       resault: eval(num1 + action + num2),
+      ansver: false,
     });
     setTimeout(() => {
+      // eslint-disable-next-line no-eval
       console.log(eval(num1 + action + num2));
     }, 1000);
     console.log("resault = ", this.state.resault);
@@ -43,6 +56,7 @@ class Kalkulator extends Component {
       actions: "",
       btns: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       clicked: true,
+      ansver: true,
     });
   }
 
@@ -51,13 +65,18 @@ class Kalkulator extends Component {
   render() {
     return (
       <div>
-        {this.Resault ? (
-          <h1 className="resault">
-            {this.state.clicked ? this.state.num1 : this.state.num2}
-          </h1>
-        ) : (
-          <h1 className="resault">{this.state.resault}</h1>
-        )}
+        <h1
+          onClick={() => {
+            this.handleDelet();
+          }}
+          className="resault"
+        >
+          {this.state.ansver
+            ? this.state.clicked
+              ? this.state.num1
+              : this.state.num2
+            : this.state.resault}
+        </h1>
 
         <div className="btns">
           <div className="">
@@ -94,8 +113,9 @@ class Kalkulator extends Component {
                 </button>
               ))}
               <button
+                value={0}
                 onClick={(e) => {
-                  this.handleActions(e.target.value);
+                  this.handleNum(e.target.value);
                 }}
                 className="btn3 btnZero"
               >
