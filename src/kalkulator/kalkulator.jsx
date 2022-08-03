@@ -63,6 +63,7 @@ class Kalkulator extends Component {
   Resault = this.state.resault === 0;
 
   render() {
+    
     return (
       <div>
         <h1
